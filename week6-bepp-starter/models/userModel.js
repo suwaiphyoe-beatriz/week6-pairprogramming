@@ -17,6 +17,22 @@ const userSchema = mongoose.Schema(
       type: String,
       required: [true, "Please add a password"],
     },
+    phone_number: { 
+      type: String, 
+      required: [true, "Please add ph number"]
+    },
+    gender: { 
+      type: String, 
+      required: [true, " Please add gender"] 
+    },
+    date_of_birth: { 
+      type: String, 
+      required: [true, " Please add dob"] 
+    },
+    membership_status: { 
+      type: String, 
+      required: [true, " Please add membership status"] 
+    },
   },
   {
     timestamps: true,
@@ -24,9 +40,9 @@ const userSchema = mongoose.Schema(
 );
 
 // static signup method
-userSchema.statics.signup = async function (name, email, password) {
+userSchema.statics.signup = async function (name, email, password, phone_number, gender, date_of_birth, membership_status) {
   // validation
-  if ((!name, !email || !password)) {
+  if (!name || !email || !password || !phone_number || !gender || !date_of_birth || !membership_status) {
     throw Error("Please add all fields");
   }
   if (!validator.isEmail(email)) {
@@ -49,6 +65,11 @@ userSchema.statics.signup = async function (name, email, password) {
     name,
     email,
     password: hashedPassword,
+    phone_number,
+    gender,
+    date_of_birth,
+    membership_status,
+
   });
 
   return user;
