@@ -25,7 +25,7 @@
 We’ll stick with the **model statics approach** (like Monday’s version).  
 It keeps controllers smaller, puts all auth logic in one place, and follows good MVC practices.
 
-## Iteraion 7
+## Iteration 7
 ### Backend folder / Monday
 - `userSchema.statics.signup` and `login` handle validation, password hashing, and authentication inside the model.
 - Backend folder: simple schema (`email` + `password`).  
