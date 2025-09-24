@@ -1,14 +1,14 @@
 import useSignup from "../hooks/useSignup";
 
 const SignupComponent = ({ setIsAuthenticated }) => {
-  const { email, setEmail, password, setPassword, handleSignup } =
+  const { email, setEmail, password, setPassword, password2, setPassword2, handleSignup } =
     useSignup(setIsAuthenticated);
 
   return (
     <div>
       <h2>Signup</h2>
       <label>
-        email:
+        Email:
         <input
           type="text"
           value={email}
@@ -25,6 +25,14 @@ const SignupComponent = ({ setIsAuthenticated }) => {
         />
       </label>
       <br />
+      <label>
+        Confirm Password:
+        <input
+        type= "password"
+        value={password2}
+        onChange={(e) => setPassword2(e.target.value)}
+      />
+      </label>
       <button onClick={handleSignup}>Sign Up</button>
     </div>
   );

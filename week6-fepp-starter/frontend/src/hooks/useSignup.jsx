@@ -4,21 +4,26 @@ import { useNavigate } from "react-router-dom";
 const useSignup = function (setIsAuthenticated) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
   const navigate = useNavigate();
 
   const handleSignup = async () => {
+    if (password != password2){
+      console.error(" Password does not match");
+      return;
+    }
     try {
       const response = await fetch("/api/users/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, password2 }),
       });
 
       if (response.ok) {
         const user = await response.json();
-        localStorage.setItem("user", JSON.stringify(user));
+        sessionStorage.setItem("user", JSON.stringify(user));
         console.log("User signed up successfully!");
         setIsAuthenticated(true);
         navigate("/");
@@ -35,6 +40,8 @@ const useSignup = function (setIsAuthenticated) {
     setEmail,
     password,
     setPassword,
+    password2,
+    setPassword2,
     handleSignup,
   };
 };
